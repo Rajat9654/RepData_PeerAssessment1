@@ -1,14 +1,19 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+author: "Rajat Gupta"
+date: "May 20, 2017"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+  keep_md : true
+
 ---
 # Loading and preprocessing the data
 
 ##1. Load the data (i.e. read.csv())
 
-Check whether the the **destfile** is present, if not download from the **fileURL** link. Analysing the data using head and str functions. 
+Check whether the the **destfile** is present, if not download from the **fileURL** link. Analyzing the data using head and str functions. 
 
 ```{r loading, include=TRUE , echo=TRUE}
 destfile <- "repdata%2Fdata%2Factivity.zip" 
@@ -43,7 +48,7 @@ head(Activity,6)
 
 ##1.Calculate the total number of steps taken per day
 
-The total number of steps per day is calculated using the aggregate function having argugment of sum.
+The total number of steps per day is calculated using the aggregate function having argument of sum.
 
 ```{r steps per day, include=TRUE , echo=TRUE}
 
@@ -69,13 +74,13 @@ hist(x = TotalStepsPerDay$Steps , xlab = "Step" ,main = "Histogram plot of total
 
 ```{r mean1, include=TRUE , echo=TRUE}
 
-Mean <- mean(Activity$steps, na.rm = TRUE)
+Mean <- mean(TotalStepsPerDay$Steps, na.rm = TRUE)
 
 ```
 
 ```{r median1, include=TRUE , echo=TRUE}
 
-Median <- median(Activity$steps, na.rm = TRUE)
+Median <- median(TotalStepsPerDay$Steps, na.rm = TRUE)
 
 ```
 
@@ -85,7 +90,7 @@ The mean of the total number steps taken per day is **`r  Mean`** and median is 
 
 ##1.Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-The total number of steps per day is calculated using the aggregate function having argugment of sum. Adding names to created variable and the plotting  it with type = "l" plot
+The total number of steps per day is calculated using the aggregate function having argument of sum. Adding names to created variable and the plotting  it with type = "l" plot
 
 ```{r Average steps, include=TRUE , echo=TRUE}
 
@@ -130,11 +135,11 @@ The total number of missing values is **`r Missing.Values`**.
 
 ##2.Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-Combining next question solutions with 2.
+Here we are filling the missing interval data using verge interval data we obtained from previous parts. Combining next question solutions with 2.
 
 ##3.Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
-Creating a Activity.NoNa variable which is initally equal to Activity fata frame.
+Creating a Activity.NoNa variable which is initially equal to Activity data frame.
 
 ```{r Activity, include=TRUE , echo=TRUE}
 Activity.NoNA <- Activity
@@ -170,18 +175,20 @@ par(mfrow = c(1,2))
 hist(x = TotalStepsPerDay.NoNa$Steps, xlab = "Step" ,main = "Total steps per day for NoNa")
 hist(x = TotalStepsPerDay$Steps, xlab = "Step" ,main = "Total steps per day")
 
-Mean2 <- mean(Activity.NoNA$steps, na.rm = TRUE)
+Mean2 <- mean(TotalStepsPerDay.NoNa$Steps, na.rm = TRUE)
 
-Median2 <- median(Activity.NoNA$steps, na.rm = TRUE)
+Median2 <- median(TotalStepsPerDay.NoNa$Steps, na.rm = TRUE)
 
 ```
-The new mean after removing the NA values is **`r Mean2`** which is slightly higher than original mean **`r Mean`**. However, the median remains the same with new median value **`r Median2`** and original being **`r Median`**. 
+The new mean after removing the NA values is **`r Mean2`** which is slightly higher than original mean **`r Mean`**. 
+
+However, the median remains the almost same with new median value **`r Median2`** and original being **`r Median`**. 
 
 #Are there differences in activity patterns between weekdays and weekends?
 
 For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
 
-##1.Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+##1.Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 
 Creating a new factor variable with two levels.
 
